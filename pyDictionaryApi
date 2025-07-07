@@ -1,0 +1,22 @@
+import requests
+
+
+def py_Dictionary(word):
+    url = ("https://api.dictionaryapi.dev/api/v2/entries/en/")
+    response = requests.get(url + word)
+
+
+    data = response.json()
+
+    print(f"The definition of {data[0]['word']}")
+    
+    for meaning in data[0]['meanings']:
+        print(f"\nPart of Speech: {meaning['partOfSpeech']}")
+        for definition in meaning['definitions']:
+            print(f"Definition: {definition['definition']}")
+            example = definition.get('example')
+            if example:
+                print(f"Example: {example}")
+
+word = input("Please enter a word for a definition: ")
+py_Dictionary(word)
